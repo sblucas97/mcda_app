@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import QMainWindow, QStackedWidget
 from gui.screens.menu_screen import MenuScreen
 from gui.screens.borda_screen import BordaScreen
 from gui.screens.condorcet_screen import CondorcetScreen
+from gui.screens.copelant_screen import CopelantScreen
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -17,27 +18,34 @@ class MainWindow(QMainWindow):
         self.menu_screen = MenuScreen()
         self.borda_screen = BordaScreen()
         self.condorcet_screen = CondorcetScreen()
+        self.copelant_screen = CopelantScreen()
 
         # Add screens to stacked widget
         self.stacked_widget.addWidget(self.menu_screen)
         self.stacked_widget.addWidget(self.borda_screen)
         self.stacked_widget.addWidget(self.condorcet_screen)
+        self.stacked_widget.addWidget(self.copelant_screen)
         
         # Connect signals
         self.menu_screen.method_selected.connect(self.show_borda_screen)
         self.menu_screen.condorcet_selected.connect(self.show_condorcet_screen)
+        self.menu_screen.copelant_selected.connect(self.show_copelant_screen)
         self.condorcet_screen.back_clicked.connect(self.show_menu_screen)
         self.borda_screen.back_clicked.connect(self.show_menu_screen)
-        
+        self.copelant_screen.back_clicked.connect(self.show_menu_screen)
+
         # Start with menu screen
         self.show_menu_screen()
-    
+
     def show_menu_screen(self):
         self.stacked_widget.setCurrentWidget(self.menu_screen)
-    
+
     def show_condorcet_screen(self):
         self.stacked_widget.setCurrentWidget(self.condorcet_screen)
-        
+
+    def show_copelant_screen(self):
+        self.stacked_widget.setCurrentWidget(self.copelant_screen)
+
     def show_borda_screen(self, method_name):
         self.borda_screen.set_method(method_name)
         self.stacked_widget.setCurrentWidget(self.borda_screen)

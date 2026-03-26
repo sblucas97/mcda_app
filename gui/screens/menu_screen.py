@@ -6,6 +6,7 @@ from PyQt6.QtGui import QFont
 class MenuScreen(QWidget):
     method_selected = pyqtSignal(str)
     condorcet_selected = pyqtSignal()
+    copelant_selected = pyqtSignal()
     
     def __init__(self):
         super().__init__()
@@ -82,8 +83,31 @@ class MenuScreen(QWidget):
         """)
         condorcet_method_button.clicked.connect(self.select_condorcet_method)
 
+        #Copelant Method button
+        copelant_method_button = QPushButton("Copelant Method")
+        copelant_method_button.setMinimumHeight(60)
+        copelant_method_button.setStyleSheet("""
+            QPushButton {
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                font-size: 14px;
+                font-weight: bold;
+                padding: 10px;
+            }
+            QPushButton:hover {
+                background-color: #45a049;
+            }
+            QPushButton:pressed {
+                background-color: #3d8b40;
+            }
+        """)
+        copelant_method_button.clicked.connect(self.select_copelant_method)
+
         methods_layout.addWidget(borda_button)
         methods_layout.addWidget(condorcet_method_button)
+        methods_layout.addWidget(copelant_method_button)
         
         # Add more method buttons here in the future
         # Example:
@@ -96,6 +120,9 @@ class MenuScreen(QWidget):
 
     def select_condorcet_method(self):
         self.condorcet_selected.emit()
+
+    def select_copelant_method(self):
+        self.copelant_selected.emit()
     
     def select_method(self, method_name):
         self.method_selected.emit(method_name)
