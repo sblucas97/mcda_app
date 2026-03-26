@@ -1,8 +1,7 @@
 from PyQt6.QtWidgets import QMainWindow, QStackedWidget
-from PyQt6.QtCore import Qt
-from gui.menu_screen import MenuScreen
-from gui.borda_screen import BordaScreen
-from gui.condorcet_screen import CondorcetScreen
+from gui.screens.menu_screen import MenuScreen
+from gui.screens.borda_screen import BordaScreen
+from gui.screens.condorcet_screen import CondorcetScreen
 
 class MainWindow(QMainWindow):
     def __init__(self):
